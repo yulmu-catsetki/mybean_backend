@@ -5,6 +5,14 @@ import voice from "elevenlabs-node";
 import express from "express";
 import { promises as fs } from "fs";
 import OpenAI from "openai";
+import cors from 'cors';
+
+const corsOptions = {
+  origin: 'https://mybean-frontend.vercel.app', // Replace with your frontend URL
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+
+app.use(cors(corsOptions));
 dotenv.config();
 
 const openai = new OpenAI({
