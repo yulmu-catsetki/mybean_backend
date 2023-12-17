@@ -7,14 +7,8 @@ import { promises as fs } from "fs";
 import OpenAI from "openai";
 import cors from 'cors';
 
-const corsOptions = {
-  origin: 'https://mybean-frontend.vercel.app', // Replace with your frontend URL
-  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-};
 
-app.use(cors(corsOptions));
 dotenv.config();
-
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY || "-",
 });
@@ -23,6 +17,13 @@ const elevenLabsApiKey = process.env.ELEVEN_LABS_API_KEY;
 const voiceID = "GkqxApVYlPH9Fk7Hi8jA";
 
 const app = express();
+
+const corsOptions = {
+  origin: 'https://mybean-frontend.vercel.app', // Replace with your frontend URL
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cors());
 const port = 3000;
