@@ -17,7 +17,6 @@ const voiceID = "GkqxApVYlPH9Fk7Hi8jA";
 const audioFileTo = async (file) => {
   // Construct an absolute path to the audio file
   const filePath = path.join(process.cwd(), file);
-  
   // Read the file using the absolute path
   const data = await fs.readFile(filePath);
   return data.toString("base64");
