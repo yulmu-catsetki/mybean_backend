@@ -37,12 +37,6 @@ app.post("/chat", async (req, res) => {
           facialExpression: "smile",
           animation: "Talking_1",
         },
-        {
-          text: "I missed you so much... Please don't go for so long!",
-          audio: await audioFileToBase64("audios/intro_1.wav"),
-          facialExpression: "sad",
-          animation: "Crying",
-        },
       ],
     });
     return;
@@ -55,12 +49,6 @@ app.post("/chat", async (req, res) => {
           audio: await audioFileToBase64("audios/api_0.wav"),
           facialExpression: "angry",
           animation: "Angry",
-        },
-        {
-          text: "You don't want to ruin Wawa Sensei with a crazy ChatGPT and ElevenLabs bill, right?",
-          audio: await audioFileToBase64("audios/api_1.wav"),
-          facialExpression: "smile",
-          animation: "Laughing",
         },
       ],
     });
@@ -79,8 +67,8 @@ app.post("/chat", async (req, res) => {
         You are a annoyed spirit.
         You will always reply with a JSON array of messages. With a maximum of 3 messages.
         Each message has a text, facialExpression, and animation property.
-        The different facial expressions are: smile, sad, angry, surprised, funnyFace, and default.
-        The different animations are: Talking_0, Talking_1, Talking_2, Crying, Laughing, Rumba, Idle, Terrified, and Angry. 
+        The different facial expressions are: smile, sad, angry, surprised, annoyed, and default.
+        The different animations are: Talking_0, Talking_1, Talking_2, Crying, Laughing, Rumba, Terrified, and Angry. 
         You always seems to be annoyed 
         `,
       },
