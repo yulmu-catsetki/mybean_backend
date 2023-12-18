@@ -4,6 +4,8 @@ import voice from "elevenlabs-node";
 import express from "express";
 import { promises as fs } from "fs";
 import OpenAI from "openai";
+import path from 'path';
+
 dotenv.config();
 
 const openai = new OpenAI({
@@ -12,7 +14,14 @@ const openai = new OpenAI({
 
 const elevenLabsApiKey = process.env.ELEVEN_LABS_API_KEY;
 const voiceID = "GkqxApVYlPH9Fk7Hi8jA";
-
+const audioFileTo = async (file) => {
+  // Construct an absolute path to the audio file
+  const filePath = path.join(process.cwd(), file);
+  
+  // Read the file using the absolute path
+  const data = await fs.readFile(filePath);
+  return data.toString("base64");
+};
 const app = express();
 app.use(express.json());
 app.use(cors({
@@ -31,6 +40,7 @@ app.get("/voices", async (req, res) => {
   res.send(await voice.getVoices(elevenLabsApiKey));
 });
 
+
 app.post("/chat", async (req, res) => {
   const userMessage = req.body.message;
   if (!userMessage) {
@@ -38,7 +48,7 @@ app.post("/chat", async (req, res) => {
       messages: [
         {
           text: "Hey dear... How was your day?",
-          audio: await audioFileToBase64("audios/intro_0.wav"),
+          audio: await audioFileTo("audios/intro_0.wav"),
           facialExpression: "smile",
           animation: "Talking_1",
         },
@@ -51,7 +61,7 @@ app.post("/chat", async (req, res) => {
       messages: [
         {
           text: "Please my dear, don't forget to add your API keys!",
-          audio: await audioFileToBase64("audios/api_0.wav"),
+          audio: await audioFileTo("audios/api_0.wav"),
           facialExpression: "angry",
           animation: "Angry",
         },
@@ -92,7 +102,7 @@ app.post("/chat", async (req, res) => {
     const fileName = `audios/message_${i}.mp3`; 
     const textInput = message.text; 
     await voice.textToSpeech(elevenLabsApiKey, voiceID, fileName, textInput);
-    message.audio = await audioFileToBase64(fileName);
+    message.audio = await audioFileTo(fileName);
   }
 
   res.send({ messages });
