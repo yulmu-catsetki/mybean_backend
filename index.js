@@ -16,7 +16,7 @@ const voiceID = "GkqxApVYlPH9Fk7Hi8jA";
 const app = express();
 app.use(express.json());
 app.use(cors({
-  origin: 'https://mybean-frontend-yulmu-catsetki.vercel.app' // or use '*' to allow any origin
+  origin: '*'
 }));
 const port = 3000;
 
