@@ -4,11 +4,8 @@ import voice from "elevenlabs-node";
 import express from "express";
 import { promises as fs } from "fs";
 import OpenAI from "openai";
-
-
-
-
 dotenv.config();
+
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY || "-",
 });
@@ -17,17 +14,6 @@ const elevenLabsApiKey = process.env.ELEVEN_LABS_API_KEY;
 const voiceID = "GkqxApVYlPH9Fk7Hi8jA";
 
 const app = express();
-/*
-const corsOptions = {
-  origin: 'https://mybean-frontend.vercel.app', // Replace with your frontend URL
-  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-};
-const corsOptions = {
-  origin: 'http://localhost:5173/', // Replace with your frontend URL
-  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-};
-*/
-
 app.use(express.json());
 app.use(cors());
 const port = 3000;
